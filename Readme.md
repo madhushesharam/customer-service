@@ -28,7 +28,8 @@ coverage report
 ```
 ### run the app in local
 ```
-flask run  # http://127.0.0.1:5000
+flask run  
+check http://127.0.0.1:5000
 
 ```
 #### Containarize 
@@ -41,7 +42,7 @@ Run the container
 podman run -p [host_port]:[container_port] [image_name]
 
 ```
-podman run -p 8080:5000 localhost/customer-service:latest 
+podman run -p 8080:5000 localhost/madhushesharam/customer-service:v1  
 
 ```
 Access service at http://localhost:8080
