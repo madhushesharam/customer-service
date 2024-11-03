@@ -23,7 +23,81 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     
-    - name: Run Unit tests and Code Coverage
+    - name: Run Unit tests 
       continue-on-error: true
       run: |  
         pytest test_app.py
+
+
+    - name: Run Code Coverage
+      continue-on-error: true
+      run: |
+        coverage run -m pytest  test_app.py    
+        coverage report
+        coverage_percentage=$(coverage report | grep TOTAL | awk '{print $4}' | sed 's/%//')
+        echo "current coverage is $coverage_percentage \n "
+        if [ "$coverage_percentage" -lt 70 ]; then
+          echo "Coverage is below 70%. Current coverage: $coverage_percentage%"
+          exit 1
+        else
+          echo "Coverage is at or above 70%. Current coverage: $coverage_percentage%"
+        fi
+
+    - name: Run Format Check 
+      continue-on-error: true
+      run: |
+        black  --check app.py   
+    
+    - name: Run Linter Check 
+      continue-on-error: true
+      run: |    
+        flake8 app.py   ## linter issues  
+    
+    - name: Run Flask app and do smoke test 
+      run: |
+        python -m flask run &
+        sleep 30
+        curl http://127.0.0.1:5000/
+        curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:5000/
+        [ $(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:5000/) = "200" ] && echo " Smoke test passed " || echo " Smoke test failed "
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    
+    - name: Build and push
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        file: ./Containerfile
+        platforms: linux/amd64,linux/arm64
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/customer-service:${{ github.sha }}      
+
+    - name: Container Image Scan
+      run: |
+        echo "TODO: Implement container image scan"
+
+    - name: Static Code Analysis
+      run: |
+        echo "TODO: Implement static code analysis"   
+
+    - name: Secret Detection Scan
+      run: |
+        echo "TODO: Implement secret detection scan"
+
+    - name: Software Composition Analysis (SCA)
+      run: |
+        echo "TODO: Implement SCA scan"
+
+    - name: Static Application Security Testing (SAST)
+      run: |
+        echo "TODO: Implement SAST scan"    
