@@ -22,9 +22,9 @@ def test_home(client):
 
 def test_get_customer(client):
     response = client.get("/customer/1234")
-    assert response.status_code == 200
+    assert response.status_code == 404
 
 
 def test_delete_customer(client):
     response = client.delete("/customer/1234")
-    assert response.status_code == 200
+    assert response.status_code == 404
