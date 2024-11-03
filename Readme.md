@@ -173,6 +173,7 @@ Connection: close
 #### CI/CD Pipeline Document
 
 Refer -> .github/workflows/main.yml 
+Pipeline execution visit-> https://github.com/madhushesharam/customer-service/actions
 
 pipeline for the Python  application. The pipeline automates testing, code quality checks, and deployment to ensure reliable updates to the Kubernetes cluster.(stages/steps have space holders for future code upgrades)
 
@@ -221,6 +222,7 @@ The CD pipeline assumes that a GitOps tool (like ArgoCD or Flux) will deploy the
 
 ### Tools/Framework used.
 Dev
+```
 Formatter - https://black.readthedocs.io/en/stable/
 linter flake8 https://flake8.pycqa.org
 sqlalchemy https://www.sqlalchemy.org/
@@ -228,8 +230,11 @@ behave for test - https://behave.readthedocs.io/en/latest/
 unit test https://docs.pytest.org
 Logger: https://docs.python.org/3/library/logging.html
 OpenTelemtry - https://opentelemetry.io/docs/languages/python/getting-started/#instrumentation 
+```
 
 Deploy
+```
 Helm for K8 Manifests - https://helm.sh/docs/helm/helm_create/
 Containarization podman alternative to docker - https://podman.io/
 kubernetes - k3 https://k3s.io/
+```
