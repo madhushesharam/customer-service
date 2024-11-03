@@ -32,6 +32,9 @@ def home():
 @app.post("/customer")
 def create_customer():
     request_data = request.get_json()
+    # TODO: If email is not unique throw bad request.
+    # if request_data["email"]  in database
+    # return {"message": "user with this email already exists."}, 400
     new_customer = {
         "id": str(uuid.uuid1()),
         "firstname": request_data["firstname"],
