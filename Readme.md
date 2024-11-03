@@ -23,13 +23,13 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 ```
-### formatter and linter
+#### formatter and linter
 ```
 black  app.py  
 flake8 app.py   
 ```
 
-### unit test and coverage report with pytest and coverage
+#### unit test and coverage report with pytest and coverage
 
 ``` 
 pytest test_app.py 
@@ -37,7 +37,7 @@ coverage run -m pytest  test_app.py
 coverage report
 ```
 
-### run the app in local
+#### run the app in local
 ```
 flask run  
 check http://127.0.0.1:5000
@@ -61,11 +61,11 @@ Tests   (make sure jq is installed)
 
 ```
 # GET (Home)
-curl --request GET --url http://127.0.0.1:5000/
+curl --request GET --url http://127.0.0.1:8080/
 
 # POST (Create Customer)
 customer_response=$(curl --request POST \
-  --url http://127.0.0.1:5000/customer \
+  --url http://127.0.0.1:8080/customer \
   --header 'Content-Type: application/json' \
   --data '{
         "firstname": "Madhusaaaaaa",
@@ -80,12 +80,12 @@ customer_id=$(echo $customer_response | jq -r .id)
 
 # GET (Retrieve Customer)
 curl --request GET \
-  --url "http://127.0.0.1:5000/customer/$customer_id" \
+  --url "http://127.0.0.1:8080/customer/$customer_id" \
   --header 'Content-Type: application/json'
 
 # PUT (Update Customer)
 curl --request PUT \
-  --url "http://127.0.0.1:5000/customer/$customer_id" \
+  --url "http://127.0.0.1:8080/customer/$customer_id" \
   --header 'Content-Type: application/json' \
   --data '{
         "firstname": "MadhuCS",
@@ -96,7 +96,7 @@ curl --request PUT \
 
 # DELETE (Delete Customer)
 curl --request DELETE \
-  --url "http://127.0.0.1:5000/customer/$customer_id/" \
+  --url "http://127.0.0.1:8080/customer/$customer_id/" \
   --header 'Content-Type: application/json'
 ```
 
@@ -120,7 +120,7 @@ opentelemetry-instrument \
     flask --app src/app.py run -p 5000
 ```
 
-#### Kubernitize
+### Kubernitize / Kubernetes 
 Create k8 deployment for app using helm
 
 #### pre-requisites/assumptions 
