@@ -1,0 +1,69 @@
+# Python-related
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.git
+.mypy_cache
+.pytest_cache
+.hypothesis
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Flask-related
+instance/
+.webassets-cache
+
+# Development and IDE-related
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS-related
+.DS_Store
+Thumbs.db
+
+# Project-specific (customize as needed)
+config.py
+.env
+*.csv
+*.json
+*.yaml
+*.yml
+
+# Docker-related
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentation
+README.md
+CHANGELOG.md
+docs/
+
+# Build and distribution 
+build/
+dist/
+*.egg-info/
+
+# Temporary files
+*.tmps
+*.bak
