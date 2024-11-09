@@ -25,21 +25,21 @@ pip install -r requirements.txt
 ```
 #### formatter and linter
 ```
-black  app.py  
-flake8 app.py   
+black  src
+flake8 src
 ```
 
 #### unit test and coverage report with pytest and coverage
 
 ``` 
-pytest test_app.py 
-coverage run -m pytest  test_app.py 
+pytest tests/unit
+coverage run -m pytest
 coverage report
 ```
 
 #### run the app in local
 ```
-flask run  
+flask --app src/app.py run
 check http://127.0.0.1:5000
 ```
 #### Containarize 
@@ -96,7 +96,7 @@ curl --request PUT \
 
 # DELETE (Delete Customer)
 curl --request DELETE \
-  --url "http://127.0.0.1:8080/customer/$customer_id/" \
+  --url "http://127.0.0.1:8080/customer/$customer_id" \
   --header 'Content-Type: application/json'
 ```
 
